@@ -228,7 +228,9 @@ typedef struct _USBD_HandleTypeDef
   uint32_t                dev_config;
   uint32_t                dev_default_config;
   uint32_t                dev_config_status; 
+#if 0
   USBD_SpeedTypeDef       dev_speed; 
+#endif
   USBD_EndpointTypeDef    ep_in[15];
   USBD_EndpointTypeDef    ep_out[15];  
   uint32_t                ep0_state;  

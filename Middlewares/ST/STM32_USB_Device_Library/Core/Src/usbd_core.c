@@ -450,7 +450,9 @@ USBD_StatusTypeDef USBD_LL_Reset(USBD_HandleTypeDef  *pdev)
 */
 USBD_StatusTypeDef USBD_LL_SetSpeed(USBD_HandleTypeDef  *pdev, USBD_SpeedTypeDef speed)
 {
+#if 0
   pdev->dev_speed = speed;
+#endif
   return USBD_OK;
 }
 

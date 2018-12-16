@@ -300,6 +300,7 @@ uint8_t  USBD_MSC_Init (USBD_HandleTypeDef *pdev,
 {
   int16_t ret = 0;
    
+#if 0
   if(pdev->dev_speed == USBD_SPEED_HIGH  ) 
   {
     /* Open EP OUT */
@@ -316,6 +317,7 @@ uint8_t  USBD_MSC_Init (USBD_HandleTypeDef *pdev,
   }
   else
   {
+#endif    
     /* Open EP OUT */
     USBD_LL_OpenEP(pdev,
                    MSC_EPOUT_ADDR,
@@ -327,7 +329,9 @@ uint8_t  USBD_MSC_Init (USBD_HandleTypeDef *pdev,
                    MSC_EPIN_ADDR,
                    USBD_EP_TYPE_BULK,
                    MSC_MAX_FS_PACKET);  
+#if 0
   }
+#endif
   pdev->pClassData = USBD_malloc(sizeof (USBD_MSC_BOT_HandleTypeDef));
   
   if(pdev->pClassData == NULL)
@@ -452,6 +456,7 @@ uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
       USBD_LL_CloseEP (pdev , (uint8_t)req->wIndex);
       if((((uint8_t)req->wIndex) & 0x80) == 0x80)
       {
+#if 0
         if(pdev->dev_speed == USBD_SPEED_HIGH  ) 
         {
           /* Open EP IN */
@@ -461,16 +466,20 @@ uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
                          MSC_MAX_HS_PACKET);  
         }
         else
-        {   
+        {
+#endif
           /* Open EP IN */
           USBD_LL_OpenEP(pdev,
                          MSC_EPIN_ADDR,
                          USBD_EP_TYPE_BULK,
                          MSC_MAX_FS_PACKET);  
+#if 0
         }
+#endif
       }
       else
       {
+#if 0
         if(pdev->dev_speed == USBD_SPEED_HIGH  ) 
         {
           /* Open EP IN */
@@ -481,12 +490,15 @@ uint8_t  USBD_MSC_Setup (USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
         }
         else
         {   
+#endif
           /* Open EP IN */
           USBD_LL_OpenEP(pdev,
                          MSC_EPOUT_ADDR,
                          USBD_EP_TYPE_BULK,
                          MSC_MAX_FS_PACKET);  
+#if 0
         }
+#endif
       }
       
       /* Handle BOT error */
