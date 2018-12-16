@@ -593,10 +593,10 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
 
   if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_WKUP))
   {
-    hpcd->Instance->CNTR &= ~(USB_CNTR_LP_MODE);
-    hpcd->Instance->CNTR &= ~(USB_CNTR_FSUSP);
+    // hpcd->Instance->CNTR &= ~(USB_CNTR_LP_MODE);
+    // hpcd->Instance->CNTR &= ~(USB_CNTR_FSUSP);
     
-    HAL_PCD_ResumeCallback(hpcd);
+    // HAL_PCD_ResumeCallback(hpcd);
 
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_WKUP);     
   }
@@ -604,22 +604,22 @@ void HAL_PCD_IRQHandler(PCD_HandleTypeDef *hpcd)
   if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_SUSP))
   { 
     /* Force low-power mode in the macrocell */
-    hpcd->Instance->CNTR |= USB_CNTR_FSUSP;
+    // hpcd->Instance->CNTR |= USB_CNTR_FSUSP;
     
     /* clear of the ISTR bit must be done after setting of CNTR_FSUSP */
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_SUSP);  
 
-    hpcd->Instance->CNTR |= USB_CNTR_LP_MODE;
-    if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_WKUP) == 0U)
-    {
-      HAL_PCD_SuspendCallback(hpcd);
-    }
+    // hpcd->Instance->CNTR |= USB_CNTR_LP_MODE;
+    // if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_WKUP) == 0U)
+    // {
+      // HAL_PCD_SuspendCallback(hpcd);
+    // }
   }
 
   if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_SOF))
   {
     __HAL_PCD_CLEAR_FLAG(hpcd, USB_ISTR_SOF); 
-    HAL_PCD_SOFCallback(hpcd);
+    // HAL_PCD_SOFCallback(hpcd);
   }
 
   if (__HAL_PCD_GET_FLAG (hpcd, USB_ISTR_ESOF))
