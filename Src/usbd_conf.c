@@ -180,7 +180,7 @@ void HAL_PCD_SOFCallback(PCD_HandleTypeDef *hpcd)
 void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
 { 
   USBD_SpeedTypeDef speed = USBD_SPEED_FULL;
-
+#if 0
   /* Set USB current speed. */
   switch (hpcd->Init.speed)
   {
@@ -192,6 +192,7 @@ void HAL_PCD_ResetCallback(PCD_HandleTypeDef *hpcd)
     speed = USBD_SPEED_FULL;
     break;    
   }
+#endif
   USBD_LL_SetSpeed((USBD_HandleTypeDef*)hpcd->pData, speed);
   
   /* Reset Device. */
