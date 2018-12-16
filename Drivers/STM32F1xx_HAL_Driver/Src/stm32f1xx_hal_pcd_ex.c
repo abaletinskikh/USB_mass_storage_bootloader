@@ -179,12 +179,15 @@ HAL_StatusTypeDef  HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd,
   }
   
   /* Here we check if the endpoint is single or double Buffer*/
+#if 0
   if (ep_kind == PCD_SNG_BUF)
   {
     /*Single Buffer*/
     ep->doublebuffer = 0U;
+#endif
     /*Configure te PMA*/
     ep->pmaadress = (uint16_t)pmaadress;
+#if 0
   }
   else /*USB_DBL_BUF*/
   {
@@ -194,7 +197,7 @@ HAL_StatusTypeDef  HAL_PCDEx_PMAConfig(PCD_HandleTypeDef *hpcd,
     ep->pmaaddr0 =  pmaadress & 0x0000FFFFU;
     ep->pmaaddr1 =  (pmaadress & 0xFFFF0000U) >> 16U;
   }
-  
+#endif
   return HAL_OK; 
 }
 #endif /* USB */

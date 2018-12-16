@@ -266,10 +266,10 @@ typedef struct
   
   uint16_t  pmaaddr1;        /*!< PMA Address1
                                  This parameter can be any value between Min_addr = 0 and Max_addr = 1K   */
-  
+#if 0  
   uint8_t   doublebuffer;    /*!< Double buffer enable
                                  This parameter can be 0 or 1                                             */
-  
+#endif  
   uint16_t  tx_fifo_num;    /*!< This parameter is not required by USB Device FS peripheral, it is used 
                                  only by USB OTG FS peripheral    
                                  This parameter is added to ensure compatibility across USB peripherals   */

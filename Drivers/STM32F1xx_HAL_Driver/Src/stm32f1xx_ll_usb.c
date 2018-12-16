@@ -1723,8 +1723,10 @@ HAL_StatusTypeDef USB_ActivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
   
   PCD_SET_EP_ADDRESS(USBx, ep->num, ep->num);
   
+#if 0
   if (ep->doublebuffer == 0) 
   {
+#endif
     if (ep->is_in)
     {
       /*Set the endpoint Transmit buffer address */
@@ -1743,6 +1745,7 @@ HAL_StatusTypeDef USB_ActivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
       /* Configure VALID status for the Endpoint*/
       PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_VALID);
     }
+#if 0
   }
   /*Double Buffer*/
   else
@@ -1775,7 +1778,7 @@ HAL_StatusTypeDef USB_ActivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
       PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_DIS);
     }
   }
-  
+#endif  
   return HAL_OK;
 }
 
@@ -1787,8 +1790,10 @@ HAL_StatusTypeDef USB_ActivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
   */
 HAL_StatusTypeDef USB_DeactivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
 {
+#if 0
   if (ep->doublebuffer == 0) 
   {
+#endif
     if (ep->is_in)
     {
       PCD_CLEAR_TX_DTOG(USBx, ep->num);
@@ -1801,6 +1806,7 @@ HAL_StatusTypeDef USB_DeactivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
       /* Configure DISABLE status for the Endpoint*/
       PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_DIS);
     }
+#if 0
   }
   /*Double Buffer*/
   else
@@ -1828,6 +1834,7 @@ HAL_StatusTypeDef USB_DeactivateEndpoint(USB_TypeDef *USBx, USB_EPTypeDef *ep)
       PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_DIS);
     }
   }
+#endif
   
   return HAL_OK;
 }
@@ -1859,10 +1866,13 @@ HAL_StatusTypeDef USB_EPStartXfer(USB_TypeDef *USBx , USB_EPTypeDef *ep)
     }
     
     /* configure and validate Tx endpoint */
+#if 0
     if (ep->doublebuffer == 0) 
     {
+#endif
       USB_WritePMA(USBx, ep->xfer_buff, ep->pmaadress, len);
       PCD_SET_EP_TX_CNT(USBx, ep->num, len);
+#if 0
     }
     else
     {
@@ -1882,6 +1892,7 @@ HAL_StatusTypeDef USB_EPStartXfer(USB_TypeDef *USBx , USB_EPTypeDef *ep)
       USB_WritePMA(USBx, ep->xfer_buff, pmabuffer, len);
       PCD_FreeUserBuffer(USBx, ep->num, ep->is_in);
     }
+#endif
     
     PCD_SET_EP_TX_STATUS(USBx, ep->num, USB_EP_TX_VALID);
   }
@@ -1900,16 +1911,20 @@ HAL_StatusTypeDef USB_EPStartXfer(USB_TypeDef *USBx , USB_EPTypeDef *ep)
     }
     
     /* configure and validate Rx endpoint */
+#if 0
     if (ep->doublebuffer == 0) 
     {
+#endif
       /*Set RX buffer count*/
       PCD_SET_EP_RX_CNT(USBx, ep->num, len);
+#if 0
     }
     else
     {
       /*Set the Double buffer counter*/
       PCD_SET_EP_DBUF_CNT(USBx, ep->num, ep->is_in, len);
     }
+#endif
     
     PCD_SET_EP_RX_STATUS(USBx, ep->num, USB_EP_RX_VALID);
   }

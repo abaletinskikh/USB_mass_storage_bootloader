@@ -1296,13 +1296,16 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
         ep = &hpcd->OUT_ep[epindex];
         
         /* OUT double Buffering*/
+#if 0
         if (ep->doublebuffer == 0U)
         {
+#endif
           count = PCD_GET_EP_RX_CNT(hpcd->Instance, ep->num);
           if (count != 0U)
           {
             USB_ReadPMA(hpcd->Instance, ep->xfer_buff, ep->pmaadress, count);
           }
+#if 0
         }
         else
         {
@@ -1326,6 +1329,7 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
           }
           PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_OUT);  
         }
+#endif
         /*multi-packet on the NON control OUT endpoint*/
         ep->xfer_count+=count;
         ep->xfer_buff+=count;
@@ -1350,13 +1354,16 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
         PCD_CLEAR_TX_EP_CTR(hpcd->Instance, epindex);
         
         /* IN double Buffering*/
+#if 0
         if (ep->doublebuffer == 0U)
         {
+#endif
           ep->xfer_count = PCD_GET_EP_TX_CNT(hpcd->Instance, ep->num);
           if (ep->xfer_count != 0U)
           {
             USB_WritePMA(hpcd->Instance, ep->xfer_buff, ep->pmaadress, ep->xfer_count);
           }
+#if 0
         }
         else
         {
@@ -1380,6 +1387,7 @@ static HAL_StatusTypeDef PCD_EP_ISR_Handler(PCD_HandleTypeDef *hpcd)
           }
           PCD_FreeUserBuffer(hpcd->Instance, ep->num, PCD_EP_DBUF_IN);  
         }
+#endif
         /*multi-packet on the NON control IN endpoint*/
         ep->xfer_count = PCD_GET_EP_TX_CNT(hpcd->Instance, ep->num);
         ep->xfer_buff+=ep->xfer_count;
