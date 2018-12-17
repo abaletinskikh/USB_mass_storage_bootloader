@@ -8,7 +8,7 @@ It takes up 16kB of flash memory.
 Bootloader is entered when USB plugged in PC and wait enumeration.
 If enumeration is not started, Bootloader will run the user code.
 
-*REMEMBER TO EDIT YOUR PROGRAM'S LINKER SCRIPT TO START THE CODE AT ADDRESS 0x4000*
+*REMEMBER TO EDIT YOUR PROGRAM'S LINKER SCRIPT TO START THE CODE AT ADDRESS 0x3800*
 
 This software is still experimental, please report any issues!
 
@@ -30,12 +30,12 @@ stm32flash -v -w build/USBMassStorage.bin /dev/ttyUSB0
     
      and change it to:
 
-	FLASH (rx) : ORIGIN = **0x00004000**, LENGTH = 112k
+	FLASH (rx) : ORIGIN = **0x00003800**, LENGTH = 114k
 
     then rebuild your project
     ( for CubeMX projects also need to change VECT_TAB_OFFSET )
 
-* Plug in your board , the system should recognize it as a 212 kB mass storage device. The 112 kB space will be used by the *FIRMWARE.BIN* file. This file contains the user code. 
+* Plug in your board , the system should recognize it as a 218 kB mass storage device. The 114 kB space will be used by the *FIRMWARE.BIN* file. This file contains the user code. 
 The red LED (PC13) will blink when the bootloader is running.
 * You can download the FIRMWARE.BIN found on the drive to download the contents of flash memory
 * You can upload your firmware to the board by copying your firmware to the device (the first file you put on the device will be considered new firmware)
